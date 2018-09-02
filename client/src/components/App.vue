@@ -4,10 +4,9 @@
       <Header :msg="msg"/>
       <h1>Welcome to {{ hello }}</h1>
     </div>
+    <button @click="getPack">Open pack</button>
     <p> {{ pack }} </p>
     <h1>{{ input }}</h1>
-    <input type="text" v-model="input">
-      <button @click="getPack">Open pack</button>
   </div>
 </template>
 
@@ -20,7 +19,6 @@
     data() {
       return {
         hello: "The Pokemon API app",
-        input: 'dw',
         msg: 'hello world',
         pack: []
       }
