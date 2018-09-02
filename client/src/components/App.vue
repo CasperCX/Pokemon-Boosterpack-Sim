@@ -4,6 +4,7 @@
       <Header :msg="msg"/>
       <h1>Welcome to {{ hello }}</h1>
     </div>
+    <p> {{ pack }} </p>
     <h1>{{ input }}</h1>
     <input type="text" v-model="input">
       <button @click="getPack">Open pack</button>
@@ -27,8 +28,7 @@
     methods: {
       async getPack() {
        try {
-         console.log("getting pack")
-         const res = await axios.get('http://localhost:5000/getpack');
+         this.pack = await axios.get('http://localhost:5000/getpack');
          console.log("got:", res.data);
        } catch(err) {
          console.log(err);
