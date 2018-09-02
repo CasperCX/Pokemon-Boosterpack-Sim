@@ -17,36 +17,6 @@ router.get('/getone', async (req, res) => {
 });
 
 
-router.get('/getnumbers', async (req, res) => {
-    try {
-        const result = await axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon`);
-        loopNestedObj(result.data.cards);
-        console.log(numbers.length)
-        console.log(numbers);
-    } catch(err) {
-        console.log(err);
-        res.send({ message: "error getting numbers" });
-    }
-});
-
-    let numbers = [];
-    const loopNestedObj = (obj) => {
-        Object.keys(obj).forEach(key => {
-        if (obj[key] && typeof obj[key] === 'object') loopNestedObj(obj[key]);  // recurse.
-        // else console.log(key, obj[key]);  // or do something with key and val.
-        if (obj[key] === 'Common') {
-            numbers.push(obj['id']);
-            } 
-        });
-
-        return numbers;
-    };
-   
-
-
-
-
-
 //TOTAL NUMBER CARDS: 11
 //SUBTYPES: Trainer, Pokemon, Energy
 //RARE: (rare || holofoil rare || super rare )
@@ -87,6 +57,38 @@ router.get('/getpack', async (req, res) => {
         res.send({ message: "error doing requests" });
     }
 });
+
+
+
+
+router.get('/getnumbers', async (req, res) => {
+    try {
+        const result = await axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=energy`); //change supertypes querystring
+        loopNestedObj(result.data.cards);
+        console.log(numbers.length)
+        console.log(numbers);
+    } catch(err) {
+        console.log(err);
+        res.send({ message: "error getting numbers" });
+    }
+});
+
+    let numbers = [];
+    const loopNestedObj = (obj) => {
+        Object.keys(obj).forEach(key => {
+        if (obj[key] && typeof obj[key] === 'object') loopNestedObj(obj[key]);  // recurse.
+        
+        //Change keys to filter out results
+        if (key === 'supertype' && obj[key] === 'Energy') {
+            numbers.push(obj['id']);
+                } 
+            }
+        );
+
+        return numbers;
+    };
+   
+
 
 
 module.exports = router;
