@@ -6,6 +6,9 @@ module.exports = {
     'src/polyfills.js',
     'src/index.js'
   ],
+  devServer: {
+    proxy: 'http://localhost:5000/'
+  },
   html: {
     title: pkg.productName,
     description: pkg.description,

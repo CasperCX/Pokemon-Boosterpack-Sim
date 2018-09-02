@@ -1,26 +1,43 @@
 <template>
   <div id="app">
     <div class="banner">
-      <img
-        src="https://vuejs.org/images/logo.png"
-        width="100"
-        alt="vue"
-        class="logo"
-      />
-      <h1>Welcome to Vue.js</h1>
+      <Header :msg="msg"/>
+      <h1>Welcome to {{ hello }}</h1>
     </div>
-    <div class="bottom">
-      To get started, edit <code>./src/components/App.vue</code> and save to reload.<br/>
-      <span class="fade">
-        Checkout <code>./README.md</code> for more usages.
-      </span>
-    </div>
+    <h1>{{ input }}</h1>
+    <input type="text" v-model="input">
+      <button @click="getPack">Open pack</button>
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
+  import Header from './Header';
+
   export default {
-    name: 'app'
+    name: 'app',
+    data() {
+      return {
+        hello: "The Pokemon API app",
+        input: 'dw',
+        msg: 'hello world',
+        pack: []
+      }
+    },
+    methods: {
+      async getPack() {
+       try {
+         console.log("getting pack")
+         const res = await axios.get('http://localhost:5000/getpack');
+         console.log("got:", res.data);
+       } catch(err) {
+         console.log(err);
+       }
+      }
+    },
+    components: {
+      Header
+    }
   }
 </script>
 
