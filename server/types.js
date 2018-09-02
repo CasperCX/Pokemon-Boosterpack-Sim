@@ -1,6 +1,6 @@
 //Rare Pokemons
 //43
-export const RarePokemon = [ 'base5-83',
+const RarePokemonCards = [ 'base5-83',
 'base5-20',
 'base5-27',
 'base5-30',
@@ -46,7 +46,7 @@ export const RarePokemon = [ 'base5-83',
 
 //Common Pokemons
 //28
-export const CommonPokemon = [ 'base5-61',
+const CommonPokemonCards = [ 'base5-61',
 'base5-63',
 'base1-45',
 'base4-90',
@@ -77,7 +77,7 @@ export const CommonPokemon = [ 'base5-61',
 
 //Trainer cards
 //80
-export const Trainers = [ 'base4-112',
+const TrainerCards = [ 'base4-112',
   'base5-74',
   'base4-113',
   'base4-108',
@@ -160,7 +160,7 @@ export const Trainers = [ 'base4-112',
 
 //Energy cards
 //19
-export const Energy = [ 'base5-82',
+const EnergyCards = [ 'base5-82',
   'base1-102',
   'base1-99',
   'base4-129',
@@ -180,4 +180,9 @@ export const Energy = [ 'base5-82',
   'base1-97',
   'base1-101' ];
 
-
+module.exports = {
+    RarePokemonCards,
+    CommonPokemonCards,
+    TrainerCards,
+    EnergyCards
+};

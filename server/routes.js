@@ -2,6 +2,8 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
+const { RarePokemonCards, CommonPokemonCards, TrainerCards, EnergyCards } = require('./types');
+
 
 //TODO GET 10 RANDOM POKEMONS AND SEND RESPONSE
 router.get('/getone', async (req, res) => {
@@ -18,28 +20,23 @@ router.get('/getone', async (req, res) => {
 
 
 //TOTAL NUMBER CARDS: 11
-//SUBTYPES: Trainer, Pokemon, Energy
-//RARE: (rare || holofoil rare || super rare )
-//rare: 1, uncommon: 3, 7: common, 
-//TODO GET random number for amount pokemons
-//TODO GET random number for amount of items/spells
 router.get('/getpack', async (req, res) => {
     try {
         const [rare, common1, common2, common3, common4, common5, common6, trainer1, trainer2, energy1, energy2] = await Promise.all([
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=rare`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=common`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=common`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=common`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=common`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=common`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=pokemon&rarity=common`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=trainer`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=trainer`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=energy`),
-            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&supertype=energy`)
+            //1x Rare
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${RarePokemonCards[Math.floor((Math.random() * RarePokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${CommonPokemonCards[Math.floor((Math.random() * CommonPokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${CommonPokemonCards[Math.floor((Math.random() * CommonPokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${CommonPokemonCards[Math.floor((Math.random() * CommonPokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${CommonPokemonCards[Math.floor((Math.random() * CommonPokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${CommonPokemonCards[Math.floor((Math.random() * CommonPokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${CommonPokemonCards[Math.floor((Math.random() * CommonPokemonCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${TrainerCards[Math.floor((Math.random() * TrainerCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${TrainerCards[Math.floor((Math.random() * TrainerCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${EnergyCards[Math.floor((Math.random() * EnergyCards.length) + 1 )]}`),
+            axios.get(`https://api.pokemontcg.io/v1/cards/?series=base&id=${EnergyCards[Math.floor((Math.random() * EnergyCards.length) + 1 )]}`)
         ]);
 
-        
         res.send({  
             rare: rare.data,
             common1: common1.data,
