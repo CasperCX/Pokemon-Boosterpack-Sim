@@ -180,6 +180,7 @@ const EnergyCards = [ 'base5-82',
   'base1-97',
   'base1-101' ];
 
+  
 module.exports = {
     RarePokemonCards,
     CommonPokemonCards,
