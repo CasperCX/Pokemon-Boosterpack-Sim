@@ -1,5 +1,9 @@
 Pokemon boosterpack sim
 
+Stack:
+  -Vue
+  -Node.js/Express
+
 Instructions:
   1. cd client --npm install
   2. cd server --npm install
