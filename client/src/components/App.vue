@@ -5,8 +5,13 @@
       <h1>Welcome to {{ hello }}</h1>
     </div>
     <button @click="getPack">Open pack</button>
-    <p> {{ pack }} </p>
-    <h1>{{ input }}</h1>
+    <button @click="flattenPack">flatten</button>
+    <ul> 
+      <li v-for="(item, index) in pack">
+       {{ index }} {{ item.name }}
+      </li>
+    </ul>
+
   </div>
 </template>
 
@@ -21,16 +26,26 @@
         hello: "The Pokemon API app",
         msg: 'hello world',
         pack: []
+
       }
     },
     methods: {
       async getPack() {
        try {
-         this.pack = await axios.get('http://localhost:5000/getpack');
-         console.log("got:", res.data);
+         const res = await axios.get('http://localhost:5000/getpack');
+         this.pack = res.data;
+         console.log("store pack:", this.pack);
        } catch(err) {
          console.log(err);
        }
+      },
+       flattenPack: function() {
+       let result = this.pack.reduce((obj,item => {
+          obj[item.key] = item.value; 
+          return obj;
+        }), {})
+        console.log("results", result)
+        return result;
       }
     },
     components: {
