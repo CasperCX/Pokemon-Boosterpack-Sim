@@ -10,17 +10,18 @@ export default {
     name: "Card",
     props: {
         card: Object
-    }
+    },
+  
 }
 
 </script>
-
+<style>
+   
+</style>
 <style scoped>
     .card {
-        position: relative;
         float: left;
-        border: 1px solid black;
-        background: red;
+        border-radius: 5px;
         width: 100px;
         height: 200px;  
         z-index: 0;
@@ -29,8 +30,20 @@ export default {
         margin-top: -50px;
         width:275px;
         height:400px;
-        border:thin solid black;
-        background-color:red;
+        border-radius: 5px;
         z-index:999;
     }
+    .card :nth-child(1) {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+     
+    /* @for $i from 1 through 15 {
+        .bar:nth-child(#{$i}) {
+            left: ($i * 10px);
+        } */
+        /* } */
 </style>

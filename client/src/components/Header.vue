@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>WELCOME TO THE POKEMON API</h1>
+        <h1>UNPACK A POKEMON BOOSTERPACK!</h1>
     </div>
 </template>
 

@@ -35,6 +35,14 @@
        }
       }
     },
+    computed: {
+      rotateCard : function() { 
+      let i = 0;
+      for (let card of document.querySelectorAll('.card')) {
+          card.style.left = (10 * ++i) + 'px';
+          }
+      }
+    },
     components: {
       Header,
       Card
@@ -73,10 +81,10 @@
   }
 
   .cards-container {
+    position: relative;   
     height: 700px;
-    width: 80%;
+    width: 70%;
     margin: auto;
-    background: pink;
     display: inline-block;
     
   }
