@@ -1,16 +1,15 @@
 <template>
   <div id="app">
     <div class="banner">
-      <Header :msg="msg"/>
-      <h1>Welcome to {{ hello }}</h1>
+      <Header/>
+        <button @click="getPack">Open pack</button>
     </div>
-    <button @click="getPack">Open pack</button>
-    <ul> 
-      <li v-for="(item, index) in pack">
-        <Card :key={index} :card={item} />
-      </li>
-    </ul>
 
+    <div class="cards-container">
+        <div v-for="(item, index) in pack" :key="index">
+          <Card :card={item} />
+        </div>
+    </div>
   </div>
 </template>
 
@@ -23,10 +22,7 @@
     name: 'app',
     data() {
       return {
-        hello: "The Pokemon API app",
-        msg: 'hello world',
         pack: []
-
       }
     },
     methods: {
@@ -34,7 +30,6 @@
        try {
          const res = await axios.get('http://localhost:5000/getpack');
          this.pack = res.data;
-         console.log("store pack:", this.pack);
        } catch(err) {
          console.log(err);
        }
@@ -75,6 +70,15 @@
     color: #2c3e50;
     font-weight: 300;
     margin: 0;
+  }
+
+  .cards-container {
+    height: 700px;
+    width: 80%;
+    margin: auto;
+    background: pink;
+    display: inline-block;
+    
   }
 
   .banner {
