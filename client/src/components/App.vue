@@ -5,10 +5,9 @@
       <h1>Welcome to {{ hello }}</h1>
     </div>
     <button @click="getPack">Open pack</button>
-    <button @click="flattenPack">flatten</button>
     <ul> 
       <li v-for="(item, index) in pack">
-       {{ index }} {{ item.name }}
+        <Card :key={index} :card={item} />
       </li>
     </ul>
 
@@ -18,6 +17,7 @@
 <script>
   import axios from 'axios';
   import Header from './Header';
+  import Card from './Card';
 
   export default {
     name: 'app',
@@ -38,18 +38,11 @@
        } catch(err) {
          console.log(err);
        }
-      },
-       flattenPack: function() {
-       let result = this.pack.reduce((obj,item => {
-          obj[item.key] = item.value; 
-          return obj;
-        }), {})
-        console.log("results", result)
-        return result;
       }
     },
     components: {
-      Header
+      Header,
+      Card
     }
   }
 </script>
